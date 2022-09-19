@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <h1>Form rendering</h1>
+    <form action="" method="get">
+        <!-- render in row table -->
+        <table>{{form}}</table>
+        <input type="submit" value="submit">
+
+        <!-- render table in paragragrph -->
+        <!-- {{form.as_p}} -->
+
+        <!-- render by li -->
+        <!-- {{form.as_ul}} -->
+
+        <!-- render by field -->
+        <!-- form.label for labelling -->
+        <!-- {{form.first_name}} -->
+
+
+    <!-- looping of form withou hidden field
+    for i in form:
+    {{form.label}}
+    {{form.field}}-->
+
+    <!-- looping of form with hidden field
+    for i in form.visible_field:
+     -->
+
+    </form>
+    
+    
+    
+</body>
+</html>
