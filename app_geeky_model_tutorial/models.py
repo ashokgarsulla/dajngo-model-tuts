@@ -1,8 +1,7 @@
-from distutils import text_file
 import uuid
-from django.utils.translation import gettext_lazy as _
+from datetime import date
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class StudentModel(models.Model):
     stid = models.IntegerField()
@@ -66,7 +65,7 @@ class MyUUIDModel(models.Model):
         return self.name
 
 
-class FieldType(models.Model):
+class FieldTypeModel(models.Model):
     auto_field_example = models.AutoField(primary_key=True)
     boolean_field_exaple = models.BooleanField()
     char_field_example = models.CharField( max_length=50)
@@ -76,7 +75,7 @@ class FieldType(models.Model):
     duration_exaple = models.DurationField()
     email_example = models.EmailField(max_length=254)
     file_example = models.FileField(upload_to="fieldexample", max_length=100)
-    file_path_example = models.FilePathField(path='', match=None, recursive=False, allow_files=True, allow_folders=False, max_length=100)
+    # file_path_example = models.FilePathField(path='', match=None, recursive=False, allow_files=True, allow_folders=False, max_length=100)
     float_example = models.FloatField()
     ip_exaple = models.FloatField()
     imagne_exmaple =models.ImageField(upload_to="modelimage", height_field=None, width_field=None, max_length=None)
@@ -91,3 +90,38 @@ class FieldType(models.Model):
     # relation_with_my_uuid_cascade = models.ForeignKey(MyUUIDModel,on_delete=models.CASCADE)
     # relation_with_my_uuid_protect = models.ForeignKey(Card,on_delete=models.PROTECT)
     # relation_with_my_uuid_restrict = models.ForeignKey(Student,on_delete=models.RESTRICT)
+    def __str__(self):
+        return self.char_field_example
+
+
+# //////////////////////////////////////////////////////////////////////////////////////////////////////
+#                      BELOW TABLE IS CREATING FOR QUERY PURPOSE
+# //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Blog(models.Model):
+    name = models.CharField(max_length=100)
+    tagline = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Author(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+class Entry(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    headline = models.CharField(max_length=255)
+    body_text = models.TextField()
+    pub_date = models.DateField()
+    mod_date = models.DateField(default=date.today)
+    authors = models.ManyToManyField(Author)
+    number_of_comments = models.IntegerField(default=0)
+    number_of_pingbacks = models.IntegerField(default=0)
+    rating = models.IntegerField(default=5)
+
+    def __str__(self):
+        return self.headline

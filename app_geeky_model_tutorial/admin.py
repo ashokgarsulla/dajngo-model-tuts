@@ -5,6 +5,10 @@ from app_geeky_model_tutorial.models import (
     Student,
     Card,
     MyUUIDModel,
+    FieldTypeModel,
+    Blog,
+    Author,
+    Entry,
     )
 
 # admin.site.register(StudentModel)
@@ -31,3 +35,19 @@ class CardAdmin(admin.ModelAdmin):
 @admin.register(MyUUIDModel)
 class MyUUIDModelAdmin(admin.ModelAdmin):
     list_display = ('id','name')
+
+@admin.register(FieldTypeModel)
+class FieldTypeModelAdmin(admin.ModelAdmin):
+    list_display = [field.attname for field in FieldTypeModel._meta.fields]
+
+@admin.register(Author)
+class AuthorModelAdmin(admin.ModelAdmin):
+    list_display = [field.attname for field in Author._meta.fields]
+
+@admin.register(Blog)
+class BlogModelAdmin(admin.ModelAdmin):
+    list_display = [field.attname for field in Blog._meta.fields]
+
+@admin.register(Entry)
+class EntryModelAdmin(admin.ModelAdmin):
+    list_display = [field.attname for field in Entry._meta.fields]
